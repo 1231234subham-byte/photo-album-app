@@ -4,25 +4,18 @@ function decodeJwt(jwt) {
   const parts = jwt.split('.');
   if (parts.length !== 3) return null;
   try {
-    const payload = atob(parts[1].replace(/-/g, '+').replace(/_/g, '/'));
+    const payload = atob(parts[1].replace(/-/g,'+').replace(/_/g,'/'));
     return JSON.parse(decodeURIComponent(escape(payload)));
-  } catch(e) { console.error('Failed to decode JWT', e); return null; }
+  } catch(e){ console.error(e); return null; }
 }
 
-const gSignInDiv = document.getElementById('gSignIn');
 const signinUsername = document.getElementById('signinUsername');
 const signinPassword = document.getElementById('signinPassword');
 const signinBtn = document.getElementById('signinBtn');
 const signinMsg = document.getElementById('signinMsg');
 
-const signupUsername = document.getElementById('signupUsername');
-const signupEmail = document.getElementById('signupEmail');
-const signupPassword = document.getElementById('signupPassword');
-const signupBtn = document.getElementById('signupBtn');
-const signupMsg = document.getElementById('signupMsg');
-
 function setupGoogleButton() {
-  if (!window.google || !google.accounts || !google.accounts.id) return;
+  if(!window.google || !google.accounts || !google.accounts.id) return;
 
   google.accounts.id.initialize({
     client_id: GOOGLE_CLIENT_ID,
@@ -31,22 +24,22 @@ function setupGoogleButton() {
     cancel_on_tap_outside: true
   });
 
-  // Render standard Google button (we'll style it via CSS)
   google.accounts.id.renderButton(
-    gSignInDiv,
+    document.getElementById("gSignIn"),
     {
-      theme: 'filled_blue',
-      size: 'large',
-      text: 'continue_with',
-      shape: 'rectangular'
+      theme: "filled_blue",
+      size: "large",
+      width: "100%",          // full width
+      text: "continue_with",
+      shape: "rectangular"
     }
   );
 }
 
-function handleGoogleCredential(response) {
-  if (!response || !response.credential) return alert('Google sign-in failed.');
+function handleGoogleCredential(response){
+  if(!response?.credential) return alert('Google sign-in failed.');
   const payload = decodeJwt(response.credential);
-  if (!payload) return alert('Google sign-in failed to decode profile.');
+  if(!payload) return alert('Failed to decode Google profile.');
   const profile = {
     source: 'google',
     id: payload.sub,
@@ -58,40 +51,24 @@ function handleGoogleCredential(response) {
   window.location.href = 'home.html';
 }
 
-window.addEventListener('load', () => {
-  const trySetup = () => {
-    if (window.google && google.accounts && google.accounts.id) setupGoogleButton();
+window.addEventListener('load', ()=>{
+  const trySetup = ()=>{
+    if(window.google && google.accounts && google.accounts.id) setupGoogleButton();
     else setTimeout(trySetup, 200);
   };
   trySetup();
 });
 
-// Local sign-in/sign-up (unchanged)
-function loadUsers() { try { return JSON.parse(localStorage.getItem('users')||'[]'); } catch { return []; } }
-function saveUsers(users) { localStorage.setItem('users', JSON.stringify(users)); }
+// Local login
+function loadUsers(){ return JSON.parse(localStorage.getItem('users')||'[]'); }
 
-signupBtn?.addEventListener('click', () => {
-  const u = signupUsername.value.trim();
-  const e = signupEmail.value.trim();
-  const p = signupPassword.value;
-  signupMsg.textContent = '';
-  if (!u || !e || !p) { signupMsg.textContent='Fill all fields'; return; }
-  if (p.length<4){ signupMsg.textContent='Password too short'; return; }
-  const users = loadUsers();
-  if (users.find(x=>x.username===u||x.email===e)){ signupMsg.textContent='User exists'; return; }
-  users.push({username:u,email:e,password:p,name:u,picture:''});
-  saveUsers(users);
-  signupMsg.textContent='Account created — sign in now';
-  signupUsername.value=''; signupEmail.value=''; signupPassword.value='';
-});
-
-signinBtn?.addEventListener('click', ()=>{
+signinBtn.addEventListener('click', ()=>{
   const u=signinUsername.value.trim(), p=signinPassword.value;
   signinMsg.textContent='';
-  if(!u||!p){signinMsg.textContent='Enter username/email and password'; return;}
+  if(!u||!p){ signinMsg.textContent='Enter username/email and password'; return; }
   const users=loadUsers();
   const user=users.find(x=>(x.username===u||x.email===u)&&x.password===p);
-  if(!user){signinMsg.textContent='Invalid credentials'; return;}
+  if(!user){ signinMsg.textContent='Invalid credentials'; return; }
   const profile={source:'local', id:'local:'+user.username, name:user.name||user.username, email:user.email, picture:user.picture||''};
   localStorage.setItem('sessionUser', JSON.stringify(profile));
   window.location.href='home.html';

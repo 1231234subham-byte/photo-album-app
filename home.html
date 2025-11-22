@@ -9,23 +9,21 @@
 <body>
   <div class="center">
     <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <img id="profilePic" src="" width="56" height="56" style="border-radius:10px;object-fit:cover" />
+      <div class="profile-section">
+        <img id="profilePic" class="profile-pic" src="" />
         <div>
-          <div id="profileName" style="font-weight:600"></div>
-          <div id="profileEmail" class="muted"></div>
+          <div id="profileName" class="profile-name"></div>
+          <div id="profileEmail" class="profile-email"></div>
         </div>
-        <div style="margin-left:auto">
+        <div class="logout-container">
           <button id="logoutBtn" class="btn ghost">Logout</button>
         </div>
       </div>
-
       <hr>
       <h3>Welcome to your Home page</h3>
       <p class="muted">This is a placeholder — later you can add albums, gallery, Drive integration, etc.</p>
     </div>
   </div>
-
   <script type="module" src="home.js"></script>
 </body>
 </html>

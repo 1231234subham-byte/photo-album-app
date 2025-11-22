@@ -1,59 +1,195 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-:root{
-  --bg:#071022;
-  --muted:#9aa4b2;
-  --accent:#4f46e5;
-  --google-gradient: linear-gradient(135deg,#de5246,#fbbc05,#34a853,#4285f4);
+/* --- Global Variables --- */
+:root {
+  --bg: #071022;
+  --bg-alt: rgba(255,255,255,0.05);
+  --muted: #9aa4b2;
+  --accent: #4f46e5;
+  --accent-light: #06b6d4;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,system-ui,Arial;
-  background:linear-gradient(135deg,var(--bg),#0b1a33);
-  color:#e6eef8;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.center{width:100%;max-width:420px;padding:18px}
-.card{
-  background:rgba(255,255,255,0.03);
-  padding:24px;
-  border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
-}
-h1{margin:0 0 12px 0;font-size:20px}
-h3{margin:8px 0}
-input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#e6eef8;margin:6px 0}
-.btn{width:100%;padding:10px;border-radius:8px;border:none;cursor:pointer;margin-top:8px}
-.btn.primary{background:linear-gradient(90deg,var(--accent),#06b6d4);color:white}
-.btn:hover{transform:translateY(-2px);transition:transform .12s}
-.divider{text-align:center;color:var(--muted);font-size:13px;margin:6px 0}
-.muted{color:var(--muted);font-size:13px;margin-top:6px}
-hr{border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0}
 
-/* --- Google button custom look --- */
-#gSignIn > div {
-  width: 100% !important;
-  max-width: 100% !important;
-  height: 44px !important;
-  border-radius: 8px !important;
-  display: flex !important;
-  justify-content: center;
+/* --- Reset & Global Styles --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, Arial, sans-serif;
+  background: linear-gradient(135deg, #0b1a33, var(--bg));
+  color: #e6eef8;
+  min-height: 100vh;
+  display: flex;
   align-items: center;
-  font-size: 16px !important;
-  background: var(--google-gradient) !important;
-  color: white !important;
+  justify-content: center;
+}
+
+/* --- Centered Card Container --- */
+.center {
+  width: 100%;
+  max-width: 480px;
+  padding: 20px;
+}
+
+/* --- Card Styles --- */
+.card {
+  background: var(--bg-alt);
+  backdrop-filter: blur(12px);
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.7);
+}
+
+/* --- Typography --- */
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 20px;
   font-weight: 600;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  margin-bottom: 8px;
+}
+
+p.muted {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 6px;
+}
+
+/* --- Input Fields --- */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.02);
+  color: #e6eef8;
+  margin: 6px 0;
+  font-size: 14px;
+  transition: border 0.2s, background 0.2s;
+}
+
+input:focus {
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.05);
+  outline: none;
+}
+
+/* --- Buttons --- */
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
   transition: transform 0.15s, box-shadow 0.15s;
 }
-#gSignIn > div:hover {
+
+.btn.primary {
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  color: white;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: #e6eef8;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
 }
-#gSignIn > div span { /* adjust text inside button */
-  font-family: Inter, Arial, sans-serif !important;
+
+/* --- Horizontal line above Google button --- */
+hr {
+  border: none;
+  border-top: 1.5px solid rgba(255,255,255,0.15); /* slightly thicker and more visible */
+  margin: 16px 0; /* keep spacing consistent */
 }
+
+/* --- Muted Text --- */
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* --- Redirect Links (Login/Signup) --- */
+.redirect-text {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.redirect-text a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* --- Home Page Specific --- */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.logout-container {
+  margin-left: auto;
+}
+
+.profile-pic {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+}
+
+.profile-name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.profile-email {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+main.center .card section {
+  margin-top: 12px;
+}
+
+google.accounts.id.renderButton(
+  document.getElementById("gSignIn"),
+  {
+    theme: "filled_blue",
+    size: "large",
+    width: "100%",         // full width
+    shape: "rectangular",
+    text: "signin_with"    // Google standard option
+  }
+);
+
+// Replace default text with "Log in with Google"
+const observer = new MutationObserver(() => {
+  const span = document.querySelector("#gSignIn div span");
+  if (span) {
+    span.textContent = "Log in with Google";
+    observer.disconnect(); // stop observing after change
+  }
+});
+observer.observe(document.querySelector("#gSignIn"), { childList: true, subtree: true });

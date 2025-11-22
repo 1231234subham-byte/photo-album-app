@@ -11,35 +11,24 @@
 <body>
   <div class="center">
     <div class="card" id="authCard">
-
       <h1>Welcome</h1>
 
-      <!-- Sign in form -->
       <div class="form" id="signinForm">
         <h3>Sign in</h3>
-
         <input id="signinUsername" placeholder="Username or email" type="text">
         <input id="signinPassword" placeholder="Password" type="password">
-
-        <!-- Normal sign-in button -->
         <button id="signinBtn" class="btn primary">Sign In</button>
-
         <div class="muted" id="signinMsg"></div>
       </div>
 
-      <!-- Sign-up redirect message -->
-      <div style="text-align:center; margin-top:12px;">
-        <span class="muted">Don't have an account?</span>
-        <a href="signup.html" style="color:var(--accent); text-decoration:none;">
-          Sign up
-        </a>
+      <div class="redirect-text">
+        Don't have an account?
+        <a href="signup.html">Sign up</a>
       </div>
 
       <hr>
 
-      <!-- Google Sign-In button BELOW Sign-In -->
       <div id="gSignIn"></div>
-
     </div>
   </div>
 

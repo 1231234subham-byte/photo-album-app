@@ -1,31 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Home — Photo Albums</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="center">
-    <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <img id="profilePic" src="" width="56" height="56" style="border-radius:10px;object-fit:cover" />
-        <div>
-          <div id="profileName" style="font-weight:600"></div>
-          <div id="profileEmail" class="muted"></div>
-        </div>
-        <div style="margin-left:auto">
-          <button id="logoutBtn" class="btn ghost">Logout</button>
-        </div>
-      </div>
+// home.js
+const logoutBtn=document.getElementById('logoutBtn');
+const profileName=document.getElementById('profileName');
+const profileEmail=document.getElementById('profileEmail');
+const profilePic=document.getElementById('profilePic');
 
-      <hr>
-      <h3>Welcome to your Home page</h3>
-      <p class="muted">This is a placeholder — later you can add albums, gallery, Drive integration, etc.</p>
-    </div>
-  </div>
+const sessionUser=JSON.parse(localStorage.getItem('sessionUser')||'null');
+if(!sessionUser){ window.location.href='index.html'; }
+else{
+  profileName.textContent=sessionUser.name||'User';
+  profileEmail.textContent=sessionUser.email||'';
+  profilePic.src=sessionUser.picture||'https://via.placeholder.com/64';
+}
 
-  <script type="module" src="home.js"></script>
-</body>
-</html>
+logoutBtn.onclick=()=>{
+  localStorage.removeItem('sessionUser');
+  window.location.href='index.html';
+};
