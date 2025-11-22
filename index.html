@@ -1,19 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login — Photo Albums</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign in — Photo Albums</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Google Identity Services library -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-<div id="loginPage" class="page">
-  <h1>Login</h1>
-  <input type="text" id="username" placeholder="Username">
-  <input type="password" id="password" placeholder="Password">
-  <button id="loginBtn" class="btn primary">Login</button>
-  <div id="loginError" class="muted"></div>
-</div>
-<script src="login.js"></script>
+  <div class="center">
+    <div class="card" id="authCard">
+      <h1>Welcome</h1>
+
+      <!-- Google sign-in button placeholder -->
+      <div id="gSignIn" style="margin-bottom:12px"></div>
+      <div class="divider">or</div>
+
+      <!-- Sign in form -->
+      <div class="form" id="signinForm">
+        <h3>Sign in</h3>
+        <input id="signinUsername" placeholder="Username or email" type="text">
+        <input id="signinPassword" placeholder="Password" type="password">
+        <button id="signinBtn" class="btn primary">Sign In</button>
+        <div class="muted" id="signinMsg"></div>
+      </div>
+
+      <hr>
+
+      <!-- Sign up form -->
+      <div class="form" id="signupForm">
+        <h3>Create account</h3>
+        <input id="signupUsername" placeholder="Username" type="text">
+        <input id="signupEmail" placeholder="Email" type="email">
+        <input id="signupPassword" placeholder="Password" type="password">
+        <button id="signupBtn" class="btn">Sign Up</button>
+        <div class="muted" id="signupMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="login.js"></script>
 </body>
 </html>
