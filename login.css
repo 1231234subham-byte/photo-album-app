@@ -117,20 +117,21 @@ input:focus {
     font-weight: 500;
 }
 
-/* Fix Google button shrinking issue */
+/* Enforce stricter dimensions for Google button */
 .google-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%; /* Ensure full width */
-    height: 50px; /* Set a consistent height */
-    margin-top: 10px; /* Add spacing */
+    width: 100%; /* Full width of parent */
+    height: 50px; /* Fixed height */
+    margin-top: 10px;
+    min-width: 200px; /* Prevent shrinking below this width */
 }
 
 .google-btn > div {
-    width: 100% !important; /* Ensure child div takes full width */
-    height: 100% !important; /* Match parent height */
-    border-radius: 5px !important; /* Keep consistent styling */
+    flex: 1; /* Ensure child div stretches to fill parent */
+    height: 100%; /* Match parent height */
+    border-radius: 5px !important;
 }
 
 /* Signup link */
