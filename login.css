@@ -78,11 +78,11 @@ body {
     text-align: center;
 }
 
+/* Apply Adobe Font 'new-astro' to Pixora logo */
 .logo {
-    font-family: 'Poppins', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 20px;
+    font-family: 'new-astro', sans-serif;
+    font-style: normal;
+    font-weight: 300;
 }
 
 input {
